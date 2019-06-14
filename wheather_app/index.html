@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wheather App</title>
+    <meta name="author" content="Adrian Simedre">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="search">
+        <input type="text" placeholder="Enter City Name" id="search-txt">
+        <button id="vremea">Afiseaza vremea</button>
+        <button id="prognoza">Afiseaza prognoza</button>
+    </div>
+    <div id="wheather">
+        <h3>Vremea acum</h3>
+        <hr>
+        <div id="show_wheather">
+            <div id="city-name"></div>
+            <img src="" alt="" id="icon">
+            <div id="city-desW"></div>
+            <div id="city-w"></div>
+            <div id="humidity-div"></div>
+            <div id="pressure"></div>
+            <div id="temp"></div>
+            <div id="temp-min"></div>
+            <div id="temp-max"></div>
+            <div id="wind"></div>
+        </div>
+        <div id="map"></div>
+    </div>
+    <div id="wheather_forcast">
+        <h3>Vremea in urmatoarele zile</h3>
+        <hr>
+        <div class="day">
+            <table id="forecast">
+                
+            </table>
+        </div>
+    </div>
+    <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+</body>
+</html>

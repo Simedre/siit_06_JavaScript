@@ -1,0 +1,60 @@
+body{
+    background-color: lightblue;
+}
+.search{
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+}
+#search-txt{
+    padding: 5px;
+    margin: 5px;
+    width: 40%;
+}
+#vremea, #prognoza{
+    width: 20%;
+    padding: 5px;
+    margin: 5px;
+    background-color: #2E16B1;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    box-shadow: 0 9px #999;
+    border-radius: 10px;
+}
+#vremea:hover, #prognoza:hover {
+    background-color: #180773
+}
+#vremea:active, #prognoza:active {
+    background-color: #180773;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+#wheather{
+    background-color: white;
+    margin: auto;
+    width: 85%;
+    padding: 20px;
+    border-radius: 5px;
+}
+#wheather_forcast{
+    background-color: white;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    padding: 20px;
+    border-radius: 5px;
+}
+#show_wheather{
+    padding: 10px;
+}
+td{
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    width: 14%;
+}
+table{
+    margin: auto;
+}
