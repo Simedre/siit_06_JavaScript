@@ -67,3 +67,13 @@ td, th{
 .marked{
     text-decoration: line-through;
 }
+.dellBtn{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url(64-512.png); 
+    cursor: pointer;
+}
