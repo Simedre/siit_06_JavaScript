@@ -76,17 +76,20 @@ function drawList(){
         var tableHeadShopping = `<tr>
                                 <th>Item description</th>
                                 <th>Action</th>
+                                <th>Delete</th>
                                 </tr>`;
-        for (var i = 0; i<shoppingListArr.length; i++){
-            if (shoppingListArr[i][1].mark == true){
+        for (var i in shoppingList){
+            if (shoppingList[i].mark == true){
                 tableDataShopping += `<tr>
-                                        <td class="marked">${shoppingListArr[i][1].denumire}</td>
+                                        <td class="marked">${shoppingList[i].denumire}</td>
                                         <td id="mark">Mark as buyed</td>
+                                        <td class="dellBtn" onclick="del('${i}')"><td>
                                     </tr>`;
             } else {
                 tableDataShopping += `<tr>
-                                        <td>${shoppingListArr[i][1].denumire}</td>
+                                        <td>${shoppingList[i].denumire}</td>
                                         <td id="mark">Mark as buyed</td>
+                                        <td class="dellBtn" onclick="del('${i}')"><td>
                                     </tr>`;
             }
         }
@@ -148,3 +151,8 @@ function criteriu(){
 }
 document.getElementById("asc").addEventListener("click", criteriu);
 document.getElementById("dsc").addEventListener("click", criteriu);
+
+async function del(idx){
+    await ajaxPromise(`https://shopping-list-3f532.firebaseio.com/${idx}.json`,"DELETE");
+    getLista();
+}
