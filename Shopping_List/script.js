@@ -55,7 +55,7 @@ async function getLista(){
 }
 
 function drawList(){
-    if (event.target.id == "shopping_submit"){
+    if (event.target.id == "shopping_submit" || shoppingListArr.length > 0){
         var show = document.getElementById("show_shoppind");
         show.className = " show";
     }
@@ -72,7 +72,7 @@ function drawList(){
         x.innerHTML = `${shoppingListArr[nr-1][1].denumire}`;
         y.innerHTML = `Mark as buyed`;
         y.setAttribute("id", "mark");
-    } else if (event.target.id == "shopping_submit" || event.target.id == "asc" || event.target.id == "dsc"){
+    } else {
         var tableHeadShopping = `<tr>
                                 <th>Item description</th>
                                 <th>Action</th>
@@ -137,7 +137,7 @@ async function sort(shoppingListArr, dir){
             }
         }
     }
-    drawList(shoppingListArr);
+    drawList();
 }
 
 function criteriu(){
