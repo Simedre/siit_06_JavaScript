@@ -1,0 +1,55 @@
+body{
+    background-color: lightgreen;
+}
+div{
+    border: 1px solid black;
+    margin-top: 20px;
+}
+p{
+    background-color: green;
+    color: white;
+    width: auto;
+    display: inline;
+}
+table, tbody{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+td, th{
+   padding: 20;
+}
+#note{
+    background-color: lightblue;
+    width: 40%;
+    float: right;
+}
+.smaller{
+    float: left;
+    width: 50%;
+}
+.normal{
+    float: none;
+    width: 100%;
+}
+.hidden{
+    display: none;
+}
+.show{
+    display: table;
+}
+#errorElev{
+    color: red;
+    font-weight: bold;
+    background-color: transparent;
+}
+#arataNotele{
+    background-color: lightgrey;
+    padding: 2px;
+    border: 1px;
+    cursor: pointer;
+}
+#faraElevi, #faraNote{
+    background-color: transparent;
+    color: black;
+}

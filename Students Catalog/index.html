@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Students Catalog</title>
+    <meta name="author" content="Adrian Simedre">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="faraDate(), getElevi()">
+    <div id="afisareElevi">
+        <h1>Lista elevi</h1>
+        <div>
+            <form>
+                <label for="nume">Nume :</label>
+                <input type="text" id="nume">
+                <button id="addNewElev">Adauga Elev</button>
+            </form>
+        </div>
+        <div>
+            <p id="sortMedie">Sorteaza ascendent / descendent dupa medie note</p></br>
+            <p id="faraElevi"></p></br>
+            <p id="errorElev"></p></br>
+            <table id="eleviTable" class="show">
+            </table>
+        </div>
+    </div>
+    <div id="note" class="hidden">
+        <button id="hide">Ascunde Notele</button>
+        <h1 id="numeElev">Note elev: </h1>
+        <div id="adaugaNote">
+
+                <label for="nume">Nota :</label>
+                <input type="number" id="nota">
+                <button id="addNota">Adauga nota</button>
+
+        </div>
+        <div>
+            <p id="sortNote">Sorteaza ascendent / descendent notele</p></br>
+            <p id="faraNote"></p></br>
+            <table id="afisareNote">
+                
+            </table>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>

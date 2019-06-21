@@ -1,5 +1,4 @@
 var appKey = "f24f40b1c24505685fce3b8acd0fcffc";
-var mapKey = "AIzaSyA2la_BizcO86w5whiEd3zz7CyaESsoCuw";
 
 var searchButton = document.getElementById("vremea");
 var searchFrocastButton = document.getElementById("prognoza");
@@ -16,13 +15,25 @@ var pressure = document.getElementById("pressure");
 var wind = document.getElementById("wind");
 
 searchButton.addEventListener("click", findWeatherDetails);
+searchButton.addEventListener("click", showMap);
 searchFrocastButton.addEventListener("click", findWeatherDetails);
+searchFrocastButton.addEventListener("click", showMap);
 searchFrocastButton.addEventListener("click", findForcastWeatherDetails);
 searchInput.addEventListener("keyup", enterPressed);
+
+function showMap(){
+    var map = document.getElementById("map");
+    map.innerHTML = `
+    <div style="width: 100%"><iframe width="100%" height="300px" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=${searchInput.value}+(Wheather%20App)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Create a route on google maps</a></iframe></div><br />
+                    `;
+    map.className = "show";
+    console.log(map);
+}
 
 function enterPressed(event) {
     if (event.key === "Enter") {
         findWeatherDetails();
+        showMap();
     }
 }
 
@@ -65,17 +76,21 @@ function theResponse(response) {
 }
 
 function theForcast(response) {
-    var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var table = document.getElementById("forecast");
     var tableBody="";
     var jsonObject = JSON.parse(response);
     for (var i = 0; i<jsonObject.list.length; i++){
-        //var d = new Date(jsonObject.list[i].dt);
+        var d = new Date(jsonObject.list[i].dt*1000);
+        var year = d.getFullYear();
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
         tableBody +=`
             <tr>
                 <td>
-                    ${jsonObject.list[i].dt_txt.substring(0,10)}</br>
+                    ${day+" / "+month+" / "+year}</br>
+                    ${hour+":"+minute+"0"}</br>
                     ${jsonObject.list[i].weather[0].main}
                 </td>
                 <td><img src="http://openweathermap.org/img/w/${jsonObject.list[i].weather[0].icon}.png"></td>
@@ -94,9 +109,10 @@ function theForcast(response) {
                 </td>
             </tr>
         `;
-        //console.log(jsonObject.list[i].dt);
+        //console.log(day+"/"+month+"/"+year+"-"+hour+":"+minute+"0");
+        //console.log(jsonObject.list[i+1].dt);
+        //console.log(d);
     }
-
     table.innerHTML = tableBody;
     //console.log(Date(jsonObject.list[0].dt).toString().substring(0,10));
     //console.log(Date(jsonObject.list[0].dt).getFullYear());
@@ -104,20 +120,11 @@ function theForcast(response) {
 }
 
 function httpRequestAsync(url, callback){
-    //console.log("hello");
     var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = () => { 
         if (httpRequest.readyState == 4 && httpRequest.status == 200)
             callback(httpRequest.responseText);
     }
-    httpRequest.open("GET", url, true); // true for asynchronous 
+    httpRequest.open("GET", url, true);
     httpRequest.send();
-}
-
-var map;
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 8
-  });
 }
