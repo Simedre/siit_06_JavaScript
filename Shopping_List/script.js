@@ -53,6 +53,7 @@ async function getLista(){
       });
     drawList();
 }
+document.getElementById("shopping_form").addEventListener("click", getLista);
 
 function drawList(){
     if (event.target.id == "shopping_submit" || shoppingListArr.length > 0){
@@ -61,8 +62,7 @@ function drawList(){
     }
     var tableShopping = document.getElementById("table_shopping");
     var tableDataShopping = "";
-    var table = document.getElementById("table_shopping");
-    var rows = table.rows;
+    var rows = tableShopping.rows;
     if (event.target.id == "shopping_submit" && Number(rows.length) > 1){
         var nrRow = rows.length;
         var newRow = tableShopping.insertRow(nrRow);
@@ -73,30 +73,35 @@ function drawList(){
         y.innerHTML = `Mark as buyed`;
         y.setAttribute("id", "mark");
     } else {
-        var tableHeadShopping = `<tr>
-                                <th>Item description</th>
-                                <th>Action</th>
-                                <th>Delete</th>
-                                </tr>`;
+        var tableHeadShopping = `<thead>
+                                    <tr>
+                                        <th>Item description</th>
+                                        <th>Action</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>`;
         for (var i in shoppingList){
             if (shoppingList[i].mark == true){
-                tableDataShopping += `<tr>
-                                        <td class="marked">${shoppingList[i].denumire}</td>
-                                        <td id="mark">Mark as buyed</td>
-                                        <td class="dellBtn" onclick="del('${i}')"><td>
-                                    </tr>`;
+                tableDataShopping += `<tbody>
+                                        <tr>
+                                            <td class="marked">${shoppingList[i].denumire}</td>
+                                            <td id="mark">Mark as buyed</td>
+                                            <td class="dellBtn" onclick="del('${i}')"><td>
+                                        </tr>
+                                    </tbody>`;
             } else {
-                tableDataShopping += `<tr>
-                                        <td>${shoppingList[i].denumire}</td>
-                                        <td id="mark">Mark as buyed</td>
-                                        <td class="dellBtn" onclick="del('${i}')"><td>
-                                    </tr>`;
+                tableDataShopping += `<tbody>
+                                        <tr>
+                                            <td>${shoppingList[i].denumire}</td>
+                                            <td id="mark">Mark as buyed</td>
+                                            <td class="dellBtn" onclick="del('${i}')"><td>
+                                        </tr>
+                                    </tbody>`;
             }
         }
     tableShopping.innerHTML = tableHeadShopping + tableDataShopping;
     }
 }
-document.getElementById("shopping_form").addEventListener("click", drawList);
 
 async function markBuyed(){
     index2 = Number(event.target.parentElement.rowIndex - 1);

@@ -8,19 +8,26 @@
     <meta name="author" content="Adrian Simedre">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 </head>
 <body onload="getLista()">
-    <div class="shoppingList">
-        <div class="shopping_block">
-        <h1>SHOPPING LIST</h1>
-        <form id="shopping_form">
-            <input type="text" id="product" name="product">
-            <input type="submit" id="shopping_submit" value="Add item">
-        </form>
-        <button id="dsc" onclick="sortTable(0)">Sort asc / dsc</button>
-            <div id="show_shoppind" class="hidden">
-                <table id="table_shopping">
+    <div class="shoppingList d-flex justify-content-center">
+        <div class="shopping_block col-sm-6">
+            <h1 class="h1 text-muted">SHOPPING LIST</h1>
+            <form id="shopping_form">
+                <div class="row">
+                    <div class="col">
+                        <input type="text" id="product" name="product" class="form-control">
+                    </div>
+                    <div class="col">
+                        <input type="submit" id="shopping_submit" value="Add item" class="btn btn-primary">
+                    </div>
+                </div>
+            </form></br>
+            <button id="dsc" onclick="sortTable(0)" class="btn btn-dark">Sort asc / dsc</button>
+            <div id="show_shoppind" class="hidden col-sm-6">
+                <table id="table_shopping" class="table table-hover">
                 </table>
             </div>
         </div>

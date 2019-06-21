@@ -1,4 +1,5 @@
 var appKey = "f24f40b1c24505685fce3b8acd0fcffc";
+var mapKey = "AIzaSyA2la_BizcO86w5whiEd3zz7CyaESsoCuw";
 
 var searchButton = document.getElementById("vremea");
 var searchFrocastButton = document.getElementById("prognoza");
@@ -111,4 +112,12 @@ function httpRequestAsync(url, callback){
     }
     httpRequest.open("GET", url, true); // true for asynchronous 
     httpRequest.send();
+}
+
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -34.397, lng: 150.644},
+    zoom: 8
+  });
 }
