@@ -85,7 +85,7 @@ function drawList(){
                 tableDataShopping += `<tbody>
                                         <tr>
                                             <td class="marked">${shoppingList[i].denumire}</td>
-                                            <td id="mark">Mark as buyed</td>
+                                            <td id="mark">Bought</td>
                                             <td class="dellBtn" onclick="del('${i}')"><td>
                                         </tr>
                                     </tbody>`;
@@ -93,7 +93,7 @@ function drawList(){
                 tableDataShopping += `<tbody>
                                         <tr>
                                             <td>${shoppingList[i].denumire}</td>
-                                            <td id="mark">Mark as buyed</td>
+                                            <td id="mark">Bought</td>
                                             <td class="dellBtn" onclick="del('${i}')"><td>
                                         </tr>
                                     </tbody>`;
@@ -112,15 +112,23 @@ async function markBuyed(){
         cell.className = "marked";
         var keys = Object. keys(shoppingList) ;
         indexEdit = keys[index2];
-        var temp = {
-            denumire : shoppingListArr[index2][1].denumire,
-            mark : true
+        if (shoppingListArr[index2][1].mark == false){
+            var temp = {
+                denumire : shoppingListArr[index2][1].denumire,
+                mark : true
+            }
+        } else if (shoppingListArr[index2][1].mark == true){
+            var temp = {
+                denumire : shoppingListArr[index2][1].denumire,
+                mark : false
+            }
         }
             await ajaxPromise(
                 `https://shopping-list-3f532.firebaseio.com/${indexEdit}.json`,
                 "PUT",
                 JSON.stringify(temp));
     }
+    getLista();
 }
 document.getElementById("table_shopping").addEventListener("click", markBuyed);
 
