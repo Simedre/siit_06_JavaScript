@@ -1,0 +1,11 @@
+{
+    "store":{
+        "0":{
+            "imagine":"http://www.papamond.ro/wp-content/uploads/2016/11/Pastrama-de-Berbecut-4.jpg",
+            "pret": 300,
+            "nume":"pastrama de berbecut",
+            "stoc":500,
+            "descriere": "tic tac toc top"
+        }
+    }
+}

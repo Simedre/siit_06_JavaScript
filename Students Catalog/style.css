@@ -1,55 +1,110 @@
-body{
-    background-color: lightgreen;
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
-div{
-    border: 1px solid black;
-    margin-top: 20px;
+
+html{
+    max-height:100%;
 }
-p{
-    background-color: green;
-    color: white;
-    width: auto;
-    display: inline;
+
+body {
+    height:100%;
+    min-width:900px;
 }
-table, tbody{
-    margin-left: auto;
-    margin-right: auto;
+
+#studentsWrapper {
+    padding: 1em;
+    height:100%;
+    background: #006363;
+    padding-bottom: 100em;
+    margin-bottom: -100em;
+    overflow: hidden;
+}
+
+#gradesWrapper {
+    padding: 1em;
+    height:100%;
+    background: #A69400;
+    position: relative;
+    padding-bottom: 100em;
+    margin-bottom: -100em;
+    overflow: hidden;
+}
+
+#hideGradesBtn {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+}
+
+.spacer{
+    min-width:0em;
+    width: 15em;
+}
+
+.interface {
     text-align: center;
+    padding: 0.5em;
+    background: #5C696A;
+    margin-bottom: 1em;
+    border-radius: 20px;
 }
-td, th{
-   padding: 20;
-}
-#note{
-    background-color: lightblue;
-    width: 40%;
-    float: right;
-}
-.smaller{
+
+.float {
     float: left;
     width: 50%;
 }
-.normal{
-    float: none;
-    width: 100%;
-}
-.hidden{
+
+.hide {
     display: none;
 }
-.show{
-    display: table;
+
+
+.sortBtn{
+    padding: 0em 1em;
 }
-#errorElev{
-    color: red;
-    font-weight: bold;
-    background-color: transparent;
+
+.highlight{
+    background: #FFFA00; 
 }
-#arataNotele{
-    background-color: lightgrey;
-    padding: 2px;
-    border: 1px;
-    cursor: pointer;
+
+h2 {
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
 }
-#faraElevi, #faraNote{
-    background-color: transparent;
-    color: black;
+
+table {
+    border-collapse: collapse;
+    width: 100%;   
+}
+
+th {
+    background: #5C696A;
+    padding:0.3em;
+    width: 10em;
+    min-width: 8.5em;
+}
+
+td{
+    text-align: center;
+    height:2.5em;
+    border-bottom:1px solid #ABC4C6;
+}
+
+input {
+    padding: 0.3em;
+}
+
+button {
+    cursor:pointer;
+    padding: 0.3em 0.5em;
+}
+button:hover{
+    background-color: black;
+    color: white;
+    border: black;
 }

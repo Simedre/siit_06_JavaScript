@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Adauga reteta noua</title>
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+    <div class="mainContainer">
+        <h1>Restaurant Romanesc - Admin</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Nume:</td>
+                    <td><input id="name" type="text"></td>
+                </tr>
+                <tr>
+                    <td>URL imagine:</td>
+                    <td><input id="image" type="text"></td>
+                </tr>
+                <tr>
+                    <td>Ingrediente:</td>
+                    <td><textarea id="ingredients"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Mod de preparare:</td>
+                    <td><textarea id="recipe"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Categoria / Taguri</td>
+                    <td><textarea id="taguri"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="helper"></div>
+        <button id="addBtn">Adauga</button>
+        <button id="cancelBtn">Anuleaza</button>
+        <button id="returnHome">Return Home</button>
+    </div>
+
+    <script>
+        document.querySelector('#addBtn').addEventListener('click', function () {
+        
+        var nume = document.querySelector('#name').value;
+        var imagine = document.querySelector('#image').value;
+        var ingrediente = document.querySelector('#ingredients').value;
+        var reteta = document.querySelector('#recipe').value;
+        var taguri = document.querySelector('#taguri').value;
+        
+        if (nume && imagine && ingrediente && reteta) {
+        
+            let newItem = {
+                nume,
+                imagine,
+                ingrediente,
+                reteta,
+                taguri: taguri.split(/[\n\r]+/g)
+            };
+        
+            fetch('https://siit-bucuresti-acba0.firebaseio.com/menu.json', {
+                method: 'POST',
+                body: JSON.stringify(newItem)
+            })
+                .then(() => window.open('./admin.html', '_self'))
+                .catch(err => console.log(err));
+        } else
+            document.querySelector('#helper').innerHTML = 'Toate campurile sunt obligatorii!';
+        });
+        
+        document.querySelector('#cancelBtn').addEventListener('click', function () {
+        window.open('./admin.html', '_self');
+        });
+
+        document.querySelector('#returnHome').addEventListener('click', function () {
+                    window.open('../index.html', '_self');
+        });
+    </script>
+</body>
+
+</html>

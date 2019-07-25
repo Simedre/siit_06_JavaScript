@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Menu Restaurant</title>
+    <meta name="author" content="Simedre Adrian">
+    <link rel="stylesheet" href="./style.css">
+
+    <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="header">
+            <h1>Meniu Restaurant</h1>
+            <input id="inputField" type="text">
+            <button id="searchBtn">Cauta</button>
+            <button id="contactBtn">Contact</button>
+            <button id="adminBtn">Admin Panel</button>
+        </div>
+        <div id="helper"></div>
+        <table>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        var menu = {};
+        
+        serverRequest()
+            .then(response => {
+                if (response.status === 200)
+                    return response.json();
+                else
+                    console.log(response.status);
+            })
+            .then(response => {
+                menu = response.menu;
+                draw(menu);
+                console.log(menu);
+            })
+            .catch(error => console.log(error));
+        
+        document.querySelector('#searchBtn').addEventListener('click', function () {
+            let foundItems = {};
+            let query = document.querySelector('#inputField').value.trim();
+            if (query) {
+                let helper = document.querySelector('#helper');
+                for (let key in menu) {
+                    let arr = menu[key].ingrediente.split(/[\s,]+/);
+                    let arrNume = menu[key].nume.split(/[\s,]+/);
+                    let arrTag;
+                    for (var i=0; i<menu[key].taguri.length; i++){
+                        arrTag += menu[key].taguri[i];
+                    }
+                    if (arr.includes(query) || arrNume.includes(query) || arrTag.includes(query)) {
+                        foundItems[key] = menu[key];
+                    }
+                }
+                if (Object.keys(foundItems).length > 0) {            
+                    helper.innerHTML = '<button id="backBtn">Inapoi la meniu</button>';
+                    document.querySelector('#backBtn').addEventListener('click', function () {
+                        draw(menu);
+                        helper.innerHTML = '';
+                        document.querySelector('#inputField').value = '';
+                    });
+                    draw(foundItems);
+                } else {
+                    helper.innerHTML = ' Nu exista produse cu acest ingredient! <button id="okBtn">OK</button>';
+                    document.querySelector('table tbody').innerHTML = '';
+        
+                    document.querySelector('#okBtn').addEventListener('click', function () {
+                        helper.innerHTML = '';
+                        document.querySelector('#inputField').value = '';                
+                        draw(menu);
+                    });
+                }
+            }
+        });
+        
+        document.querySelector('table').addEventListener('click', function () {
+            if (event.target.classList.contains('detailsBtn')) {
+                window.open(`pages/details.html?id=${event.target.id}`, '_self');
+            }
+        });
+        
+        document.querySelector('#contactBtn').addEventListener('click', function () {
+            window.open('pages/contact.html', '_self')
+        });
+
+        document.querySelector('#adminBtn').addEventListener('click', function () {
+            window.open('pages/admin.html', '_self')
+        });
+        
+        function serverRequest() {
+            return fetch('https://siit-bucuresti-acba0.firebaseio.com/.json')
+        }
+        
+        function draw(obj) {
+            let html = '';
+            for (let id in obj) {
+                let tags ="";
+                for (let i=0; i<obj[id].taguri.length; i++){
+                    tags += `<spam class="tag">${obj[id].taguri[i]}</spam>`;
+                }
+                html += `
+                <tr class="box a" data-aos="fade-up">
+                    <td><img class="foodPic" src="${obj[id].imagine}"></td>
+                    <td>
+                        <h3>${obj[id].nume}</h3>
+                        <p>${obj[id].ingrediente}</p>
+                        <p>${tags}</p>
+                    </td>
+                    <td><button id="${id}" class="detailsBtn">Detalii</button></td>
+                </tr>
+                `;
+            }
+            document.querySelector('table tbody').innerHTML = html;    
+        }
+        AOS.init();
+    </script>
+</body>
+
+</html>

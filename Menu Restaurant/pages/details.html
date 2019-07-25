@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detalii Preparat</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <div class="mainContainer">
+        <div class="header">
+            <h1>Restaurant Romanesc - Detalii produs</h1>
+            <button id="menuBtn">Inapoi la meniu</button>
+            <button id="contactBtn">Contact</button>
+        </div>
+        <div class="container"></div>
+    </div>
+
+    <script>
+        var url = new URL(document.URL);
+        var productId = url.searchParams.get('id');
+        
+        
+        serverRequest()
+            .then(response => {
+                if (response.status === 200)
+                    return response.json();
+                else
+                    console.log(response.status);
+            })
+            .then(result => draw(result))
+            .catch(err => console.log(err));
+        
+        function serverRequest() {
+            return fetch(`https://siit-bucuresti-acba0.firebaseio.com/menu/${productId}.json`)
+        }
+        
+        function draw(obj) {
+            let html = `
+                <img class="foodPicDetails" src="${obj.imagine}">
+                <h3>${obj.nume}</h3>
+                <p><b>Ingrediente:</b> ${obj.ingrediente}</p>
+                <p><b>Mod de preparare:</b> ${obj.reteta}</p>
+                <p><b>Cuvinte cheie:</b> ${obj.taguri}</p>
+            `;
+            document.querySelector('.container').innerHTML = html;
+        }
+        
+        document.querySelector('#menuBtn').addEventListener('click', function () {
+            window.open('../index.html', '_self')
+        
+        });
+        
+        document.querySelector('#contactBtn').addEventListener('click', function () {
+            window.open('./contact.html', '_self')
+        
+        });
+    </script>
+</body>
+
+</html>

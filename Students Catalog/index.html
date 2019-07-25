@@ -6,44 +6,66 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Students Catalog</title>
     <meta name="author" content="Adrian Simedre">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/solid.css"
+        integrity="sha384-ioUrHig76ITq4aEJ67dHzTvqjsAP/7IzgwE7lgJcg2r7BRNGYSK0LwSmROzYtgzs" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/fontawesome.css"
+        integrity="sha384-sri+NftO+0hcisDKgr287Y/1LVnInHJ1l+XC7+FOabmTTIK0HnE2ID+xxvJ21c5J" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
 </head>
-<body onload="faraDate(), getElevi()">
-    <div id="afisareElevi">
-        <h1>Lista elevi</h1>
-        <div>
-            <form>
-                <label for="nume">Nume :</label>
-                <input type="text" id="nume">
-                <button id="addNewElev">Adauga Elev</button>
-            </form>
-        </div>
-        <div>
-            <p id="sortMedie">Sorteaza ascendent / descendent dupa medie note</p></br>
-            <p id="faraElevi"></p></br>
-            <p id="errorElev"></p></br>
-            <table id="eleviTable" class="show">
-            </table>
-        </div>
-    </div>
-    <div id="note" class="hidden">
-        <button id="hide">Ascunde Notele</button>
-        <h1 id="numeElev">Note elev: </h1>
-        <div id="adaugaNote">
 
-                <label for="nume">Nota :</label>
-                <input type="number" id="nota">
-                <button id="addNota">Adauga nota</button>
-
+<body>
+    <div id="studentsWrapper">
+        <h2>Students list</h2>
+        <div class="interface">
+            <input type="text" id="nameInput" autocomplete="off">
+            <button id="addStudentBtn">Add student</button>
         </div>
-        <div>
-            <p id="sortNote">Sorteaza ascendent / descendent notele</p></br>
-            <p id="faraNote"></p></br>
-            <table id="afisareNote">
-                
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th class="spacer"></th>
+                    <th>Name</th>
+                    <th>Average grade</th>
+                    <th></th>
+                    <th class="spacer"></th>
+                </tr>
+                <tr>
+                    <th class="spacer"></th>
+                    <th></th>
+                    <th>
+                        <button id="sortAverageDown" class="sortBtn" data-id="sortBtn"><i class="fas fa-angle-down"></i></button>
+                        <button id="sortAverageUp" class="sortBtn" data-id="sortBtn"><i class="fas fa-angle-up"></i></button>
+                    </th>
+                    <th></th>
+                    <th class="spacer"></th>
+                </tr>
+            </thead>
+            <tbody id="studentsTableBody"></tbody>
+        </table>
     </div>
-    <script src="script.js" defer></script>
+    <div id="gradesWrapper" class="hide">
+        <button id="hideGradesBtn">Hide grades</button>
+        <h2 id="gradesHeading">Student grades</h2>
+        <div class="interface">
+            <input type="number" id="gradeInput" autocomplete="off" min="0" max="10">
+            <button id="addGradeBtn">Add grades</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Grades</th>
+                </tr>
+                <tr>
+                    <th>
+                        <button id="sortGradesDown" class="sortBtn" data-id="sortBtn"><i class="fas fa-angle-down"></i></button>
+                        <button id="sortGradesUp" class="sortBtn" data-id="sortBtn"><i class="fas fa-angle-up"></i></button>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="gradesTableBody"></tbody>
+        </table>
+    </div>
 </body>
 </html>

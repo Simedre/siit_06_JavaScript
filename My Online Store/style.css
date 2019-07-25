@@ -1,0 +1,57 @@
+    * {
+        box-sizing: border-box;
+    }
+    body{
+        text-align: center;
+        background: #3016B0;
+        background: -webkit-linear-gradient(to right, #3016B0, #60B9CE);
+        background: linear-gradient(to right, #3016B0, #60B9CE);
+        min-height: 100vh;
+    }
+    #erorrs{
+        margin-top: 50px;
+        color: red;
+    }
+    .clear{
+        clear: both;
+    }
+    .hidden{
+        display: none;
+    }
+    .show{
+        float: right;
+        margin: auto;
+    }
+    .carousel-inner > .item > img,
+    .carousel-inner > .item > a > img {
+    width: 70%;
+    margin: auto;
+    }
+    #carouselExampleIndicators li{
+        background-color: black;
+    }
+    #carouselExampleIndicatora{
+        background-color: white;
+    }
+    h5{
+        color: black;
+    }
+    #quantity{
+        margin-bottom: 10px;
+    }
+    .container{
+        margin-top: 100px;
+    }
+    #loading{
+        margin: auto;
+    }
+    .p-2 > img:hover {
+        cursor: pointer;
+    }
+    nav{
+        margin-bottom: 30px;
+    }
+    .dropdown-menu{
+        height:200px;
+        overflow-y:auto;
+    }

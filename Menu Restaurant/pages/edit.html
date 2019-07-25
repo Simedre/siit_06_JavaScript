@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Modifica preparatul</title>
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body>
+    <div class="mainContainer">
+        <h1>Restaurant Romanesc - Admin</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Nume:</td>
+                    <td><input id="name" type="text"></td>
+                </tr>
+                <tr>
+                    <td>URL imagine:</td>
+                    <td><input id="image" type="text"></td>
+                </tr>
+                <tr>
+                    <td>Ingrediente:</td>
+                    <td><textarea id="ingredients"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Mod de preparare:</td>
+                    <td><textarea id="recipe"></textarea></td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="helper"></div>
+        <button id="saveBtn">Salveaza</button>
+        <button id="cancelBtn">Anuleaza</button>
+    </div>
+
+    <script>
+        var url = new URL(document.URL);
+        var productId = url.searchParams.get('id');
+        
+        document.querySelector('#cancelBtn').addEventListener('click', function () {
+            window.open('./admin.html', '_self');
+        });
+        
+        
+        fetch(`https://siit-bucuresti-acba0.firebaseio.com/menu/${productId}.json`)
+            .then(response => {
+                if (response.status === 200)
+                    return response.json();
+                else
+                    console.log(response.status);
+            })
+            .then(result => {
+                document.querySelector('#name').value = result.nume;
+                document.querySelector('#image').value = result.imagine;
+                document.querySelector('#ingredients').value = result.ingrediente;
+                document.querySelector('#recipe').value = result.reteta;
+            })
+            .catch(err => console.log(err));
+        
+        document.querySelector('#saveBtn').addEventListener('click', function () {
+        
+            let nume = document.querySelector('#name').value;
+            let imagine = document.querySelector('#image').value;
+            let ingrediente = document.querySelector('#ingredients').value;
+            let reteta = document.querySelector('#recipe').value;
+        
+            if (nume && imagine && ingrediente && reteta) {
+        
+                let newItem = {
+                    nume,
+                    imagine,
+                    ingrediente,
+                    reteta
+                };
+        
+                fetch(`https://siit-bucuresti-acba0.firebaseio.com/menu/${productId}.json`, {
+                    method: 'PUT',
+                    body: JSON.stringify(newItem)
+                })
+                    .then(() => window.open('./admin.html', '_self'))
+                    .catch(err => console.log(err));
+            } else {
+                document.querySelector('#helper').innerHTML = 'Toate campurile sunt obligatorii!';
+            }
+        });
+    </script>
+</body>
+</html>

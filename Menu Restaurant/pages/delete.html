@@ -1,0 +1,41 @@
+    
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sterge preparatul</title>
+</head>
+
+<body>
+    <div class="mainContainer">
+        <h1>Restaurant Romanesc - Admin</h1>
+        <h3>Doresti stergerea preparatului "<span id="productName"></span>" ?</h3>
+        <button id="deleteBtn">DA</button>
+        <button id="cancelBtn">NU</button>
+    </div>
+    
+    <script>
+        var url = new URL(document.URL);
+        var productId = url.searchParams.get('id');
+        var productName = url.searchParams.get('name');
+        
+        document.querySelector('#productName').innerHTML = productName;
+        
+        document.querySelector('#deleteBtn').addEventListener('click', function () {
+            fetch(`https://siit-bucuresti-acba0.firebaseio.com/menu/${productId}.json`, {
+                method: 'DELETE'
+            })
+                .then(() => window.open('./admin.html', '_self'))
+                .catch(err => console.log(err));
+        });
+        
+        document.querySelector('#cancelBtn').addEventListener('click', function () {
+            window.open('./admin.html', '_self');
+        });
+    </script>
+</body>
+
+</html>
